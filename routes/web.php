@@ -30,5 +30,7 @@ Route::middleware([
 Route::get('/', function () {
     return view('pages.home');
 })->name('teacher#home');
+
+Route::get('/subjects'. [SubjectController::class, 'directSubject'])->name('teacher#directSubject');
 Route::get('/documentation',[DocumentationController::class, 'directDocumentation'])->name('teacher#directDocumentaion');
 });
