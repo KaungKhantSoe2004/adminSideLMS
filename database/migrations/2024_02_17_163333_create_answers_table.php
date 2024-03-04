@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('student_id');
             $table->integer('assignment_id');
             $table->text('answerFile');
+            $table->string('created_by');
             $table->timestamps();
         });
     }

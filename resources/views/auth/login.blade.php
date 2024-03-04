@@ -1,7 +1,10 @@
+@extends('dashboard')
+@section('open')
+
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            {{-- <x-authentication-card-logo /> --}}
+
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -17,8 +20,14 @@
             <img src={{asset('logo/logo.png')}}  width="50px" height=" 50px" alt="">
            </div>
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('mailSent') }}">
             @csrf
+
+
+            {{-- <div>
+                <x-label for="name" value="{{ __('Name') }}" />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            </div> --}}
 
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
@@ -44,8 +53,8 @@
                     </a>
                 @endif --}}
 
-                <a style=" margin-top: 20px" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
-                    {{ __("Don't have an account, Register") }}
+                <a style=" margin-top: 20px" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('registerPage') }}">
+                    {{ __("Don't have an admin account, register!") }}
                 </a>
 
                 <x-button class="ms-4">
@@ -55,3 +64,5 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
+
+@endsection

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class subject extends Model
 {
     use HasFactory;
-    protected $fillale = [
-        'id', 'name','class_id'
+    protected $fillable = [
+        'id', 'name','class_id','school_id', 'created_by'
     ];
 }

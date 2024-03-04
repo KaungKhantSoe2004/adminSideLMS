@@ -1,0 +1,7 @@
+.cards > div {
+    background-color: rgb(215, 216, 218);
+    border: 4px;
+}
+.bold {
+    font-weight: bold;
+}

@@ -9,7 +9,11 @@
 <div class=" card-header">
     <div class=" text-center profileImgContainer">
 
+        @if (Auth::user()->img === null)
         <img src="{{asset('logo/defaultProfile.jpg')}}" class=" w-25 h-25" style="  border-radius:50%" alt="">
+        @else
+        <img src="{{asset('profileImg/'.Auth::user()->img)}}" class="  rounded-circle" style=" width: 250px; height: 250px" alt="">
+        @endif
 <h3 class=" my-2 text-center text-primary">
 {{strtoupper(Auth::user()->name)}}
 </h3>
@@ -51,6 +55,29 @@
 
 </div>
 
+
+
+@if (session('passwordUpdated'))
+<div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+    <div class="">
+      {{session('passwordUpdated')}}
+    </div>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+@endif
+
+@if (session('updated'))
+<div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+    <div class="">
+      {{session('updated')}}
+    </div>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+@endif
 
 <div class=" card-body">
 
@@ -110,9 +137,10 @@
 
 
 <div class=" card-footer float-end ">
-    <button class=" btn btn-danger float-right p-2 ms-3 ">Change Password</button>
-    <button class=" btn btn-success float-right p-2 mx-3">Edit Your Profile</button>
 
+<a href="{{route('teacher#changePasswordPage')}}">    <button class=" btn btn-danger float-right p-2 ms-3 ">Change Password</button></a>
+
+    <a href="{{route('teacher#directEditProfile')}}"><button class=" btn btn-success float-right p-2 mx-3">Edit Your Profile</button></a>
 </div>
 
           </div>

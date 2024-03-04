@@ -1,8 +1,24 @@
+@extends('dashboard')
+@section('open')
+
+
 <x-guest-layout >
     <x-authentication-card class="">
         <x-slot name="logo">
 
 
+
+
+            @if (session('schoolCreated'))
+            <div class="alert my-5 alert-warning alert-dismissible fade show" role="alert">
+                {{session('schoolCreated')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+
+                @endif
 {{-- <img src={{asset('logo/logo.png')}} width="50px" height=" 50px" alt=""> --}}
             {{-- <x-authentication-card-logo /> --}}
         </x-slot>
@@ -13,6 +29,8 @@
         <img src={{asset('logo/logo.png')}}  width="50px" height=" 50px" alt="">
        </div>
 
+<h1 class=" my-3 text-center">Register As A School Admin</h1>
+
 {{-- <form action="{{route('register')}}">
 
 </form> --}}
@@ -21,17 +39,28 @@
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
+                <x-label for="name" value="{{ __('Admin Name') }}" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
+                <x-label for="email" value="{{ __('Admin Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
+
+
+
+
+
+
+
+
+
+
+
             <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
+                <x-label for="password" value="{{ __('Admin Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
 
@@ -59,7 +88,7 @@
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                    {{ __('Already have an account?') }}
                 </a>
 
                 <x-button class="ms-4">
@@ -69,3 +98,7 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
+
+
+
+@endsection

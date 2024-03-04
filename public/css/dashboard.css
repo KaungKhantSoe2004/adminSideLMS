@@ -1,0 +1,176 @@
+body {
+    background-color: #dbd3d8;
+}
+.bigContainer {
+    padding: 0;
+    /* height: 3000px; */
+    background-color: white;
+}
+
+/* carousel start */
+
+/* carousel */
+/* .mycarousel {
+    background-color: black;
+    top: 20%;
+} */
+
+/* carousel start */
+
+/* carousel end */
+
+.headerPost {
+    /* opacity: 0.9; */
+    z-index: 4;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: rgb(252, 252, 252);
+    border-bottom: solid 0.5px rgb(227, 222, 222);
+}
+.backgroundImg {
+    opacity: 0.4;
+    height: 90vh;
+    background-color: #020100;
+}
+.captionHeader {
+    font-size: larger;
+    color: #00a8e8;
+    /* background-color: #eeeded; */
+}
+.captionText {
+    font-size: small;
+    /* width: 100%; */
+    /* z-index: 3; */
+}
+.littleCaption {
+    /* opacity: 0.5; */
+    /* width: 10%; */
+    /* background-color: #605156; */
+    /* font-size: 1.4rem; */
+}
+.btnContainer > a {
+    /* color: #453b32; */
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.rotateDown {
+    transform: rotate(-45deg) translateY(4px);
+}
+.rotateUp {
+    transform: rotate(45deg) translateY(-5px);
+}
+.dNone {
+    display: none;
+}
+.navIcon > div {
+    height: 0.2rem;
+    margin-bottom: 4px;
+    background-color: black;
+    padding: 1px;
+
+    width: 1.5rem;
+    transition: all 1s ease;
+}
+.smallNav {
+    transition: all 2s ease;
+    left: 0px;
+    top: 6%;
+    z-index: 3;
+    padding: 50px;
+    background-color: rgb(252, 252, 252);
+}
+.dFone {
+    left: -100vh;
+    display: none;
+}
+.smallNav > a {
+    display: block;
+    /* color: #453b32; */
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 30px 1px;
+    cursor: pointer;
+    z-index: 4;
+}
+.colored {
+    /* color: #30d5c8;
+     */
+    /* color: #21bdb0; */
+    color: #7286d3;
+}
+.title {
+    margin: 0;
+
+    padding-top: 30vh;
+}
+.pricing {
+    border-radius: 10px;
+    background-color: black;
+}
+.textColor {
+    color: #605156;
+    font-size: 0.8rem;
+}
+.eachCard {
+    background-color: #a6989c;
+}
+.logoWrapper {
+    background-color: #00a8e8;
+}
+.how {
+    font-size: medium;
+    color: #5b5040;
+}
+.socialLink {
+    color: #00a8e8;
+    font-size: x-large;
+}
+.socialLink:hover {
+    font-size: xx-large;
+}
+.myCard:hover {
+    cursor: pointer;
+}
+.eachContactCard {
+    border: solid 0.3px black;
+}
+.border-1 {
+    border: solid 1px #00a8e8;
+}
+.submitBtn:hover {
+    background-color: red;
+}
+.myBtn {
+    background-color: #020100;
+    color: white;
+    padding: 4px;
+}
+.myBtn:hover {
+    background-color: #00a8e8;
+    color: black;
+}
+.priceHeader {
+    border-bottom: solid 0.6px white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.schoolSpace {
+    font-style: italic;
+    font-weight: bold;
+}
+.paymentHeadText {
+    font-size: larger;
+}
+.money {
+    font-size: large;
+}
+@media (max-width: 900px) {
+    .captionText {
+        font-size: xx-small;
+        /* width: 100%; */
+        /* z-index: 3; */
+    }
+}

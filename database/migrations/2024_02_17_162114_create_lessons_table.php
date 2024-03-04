@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('lessonSource')->nullable();
             $table->integer('subject_id');
             $table->integer('class_id');
+            $table->integer('school_id');
+            $table->string('created_by');
             $table->timestamps();
         });
     }

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('lms_classes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('school_id');
+            $table->string('created_by');
             $table->timestamps();
         });
     }

@@ -9,6 +9,6 @@ class lmsClass extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id', 'name'
+        'id', 'name','school_id','created_by'
     ];
 }

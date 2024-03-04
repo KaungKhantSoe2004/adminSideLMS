@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pizza Order System</title>
+  <title>SaSaKi Learning Management System</title>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
   <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -44,8 +45,18 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href='{{route('admin#directSchoolPage')}}' class="nav-link">
               <i class="fas fa-school"></i>
+              <p>
+                My School
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="{{route('admin#classesDirectPage')}}" class="nav-link">
+              <i class="fas fa-robot"></i>
               <p>
              My Classes
               </p>
@@ -53,7 +64,7 @@
           </li>
 
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
@@ -68,6 +79,35 @@
               <i class="fas fa-child"></i>
               <p>
               Student List
+              </p>
+            </a>
+          </li> --}}
+
+          <li class="nav-item">
+            <a href="{{route('admin#directSubject')}}" class="nav-link">
+              <i class="fas fa-school"></i>
+              <p>
+            Subjects
+              </p>
+            </a>
+          </li>
+
+
+          {{-- <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-clipboard"></i>
+              <p>
+   All Classes
+              </p>
+            </a>
+          </li> --}}
+
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-users"></i>
+              <p>
+         Users List
               </p>
             </a>
           </li>
