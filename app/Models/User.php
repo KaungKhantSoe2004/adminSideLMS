@@ -33,6 +33,7 @@ class User extends Authenticatable
         'img',
         'role',
         'school_id',
+        'isActive',
         'class_id',
         'password',
 

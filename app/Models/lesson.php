@@ -9,6 +9,6 @@ class lesson extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id', 'name', 'type', 'lessonSource',  'class_id','subject_id','school_id','created_by'
+        'id', 'name', 'type', 'lessonSource','file','description',  'class_id','subject_id','school_id','created_by'
     ];
 }

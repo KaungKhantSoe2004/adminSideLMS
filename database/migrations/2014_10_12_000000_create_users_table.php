@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->integer("class_id")->nullable();
             $table->integer('school_id')->nullable();
+            $table->boolean('isActive')->default(true);
             $table->string('img')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

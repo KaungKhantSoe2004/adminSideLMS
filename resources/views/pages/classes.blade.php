@@ -176,7 +176,7 @@
                           <td>
 
                           </td>
-                         @if (Auth::user()->role ==='schoolAdmin' || $a->created_by === Auth::user()->id)
+                         @if (Auth::user()->role ==='schoolAdmin' || $a->created_by == Auth::user()->id)
                          <td>
                             <a href="{{route('admin#classesDirectPage',$a->id)}}">
                                <button class="btn btn-sm bg-warning text-white">
@@ -199,6 +199,12 @@
                   </tbody>
 
                 </table>
+
+                <div>
+                    {{
+                        $data->links()
+                    }}
+                 </div>
 
                 </div>
 

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('type')->nullable();
-            $table->string('lessonSource')->nullable();
+            $table->longText('lessonSource')->nullable();
+            $table->string('file')->nullable();
+            $table->longText('description');
             $table->integer('subject_id');
             $table->integer('class_id');
             $table->integer('school_id');

@@ -18,7 +18,11 @@ class LmsClassController extends Controller
 if(isset($schoolId)){
 
     $data = lmsClass::select('lms_classes.*','users.name as userName','users.role as userRole')->join('users','lms_classes.created_by','users.id')
-    ->where('lms_classes.school_id',$schoolId)->get();
+    ->when($request->key , function($query){
+        $key = request('key');
+        $query->where('lms_classes.name','like','%'.$key.'%');
+    })
+    ->where('lms_classes.school_id',$schoolId)->paginate(10);
 
     if($request->id){
         $classId = $request->id;

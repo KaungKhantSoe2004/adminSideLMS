@@ -17,7 +17,7 @@ return new class extends Migration
 $table->string('schoolEmail');
 $table->string('schoolAddress');
 $table->string('schoolType');
-$table->integer('admin_id')->nullable();
+// $table->integer('admin_id')->nullable();
 $table->string('img')->nullable();
 $table->string('password');
             $table->timestamps();

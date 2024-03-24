@@ -25,7 +25,9 @@ class StripeController extends Controller
 
 // dd($data);
 
-Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+// Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+Stripe::setApiKey('sk_test_51OraHSLbSRyCojNyxUFArrX3qV4OHg9nz34LVsE3HLLvSDJqGYG3JWqbLp4UNa7OzDFJqpXYshXbeItMmISpoM6300fmfvhEXp');
+
 $session = \Stripe\Checkout\Session::create([
     'line_items'=>[
         [

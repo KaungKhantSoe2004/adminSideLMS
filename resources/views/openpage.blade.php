@@ -599,7 +599,20 @@ Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto recusandae conse
 
 </div>
 <div class=" col-md-5 offset-1 col-10   ">
-<form action=" col-10 offset-1">
+
+    @if (session('mailPosted'))
+    <div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+<div class="">
+{{session('emailPosted')}}
+</div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
+
+<form action="{{route('mailPost')}}" method="POST">
+    @csrf
 <div class=" col-12 my-4">
     <input type="text" name="name" placeholder=" Enter Your Name" class=" form-control">
 @error('name')

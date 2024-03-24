@@ -19,12 +19,16 @@ class SubjectController extends Controller
 if(isset($schoolId)){
 
     $data = subject::select('subjects.*','users.name as userName','users.role as userRole', 'lms_classes.name as className')->join('users','subjects.created_by','users.id')->join('lms_classes','subjects.class_id','lms_classes.id')
-    ->where('subjects.school_id',$schoolId)->get();
+   ->when($request->key , function($query){
+    $key = request('key');
+    $query->where('subjects.name','like','%'.$key.'%');
+})
+    ->where('subjects.school_id',$schoolId)->paginate(10);
     $classId = $request->id;
 
     $mySchoolId = Auth::user()->school_id;
 
-    $classes = lmsClass::where('school_id',$mySchoolId)->get();
+    $classes = lmsClass::where('school_id',$mySchoolId)->where('created_by',Auth::user()->id)->get();
 // dd($classes);
 
     if($request->id){

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('subject_id');
-            $table->integer('lesson_id');
+            // $table->integer('lesson_id');
             $table->integer('school_id');
             $table->string('created_by');
             $table->timestamps();

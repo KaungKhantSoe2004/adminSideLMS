@@ -58,29 +58,34 @@
    <button class=" btn bg-dark my-2"> School Address &nbsp; &nbsp; - &nbsp; &nbsp; {{$data->schoolAddress}}</button>
    <button class=" btn bg-dark my-2"> School  &nbsp; &nbsp; -  &nbsp; &nbsp;{{$data->schoolType}}</button>
    <div class=" d-flex justify-content-end">
-   <div class=" d-flex justify-content-around">
+ @if (Auth::user()->role === 'owner' || Auth::user()->role === 'schoolAdmin')
+
+ <div class=" d-flex justify-content-around">
 
 
-   <form action="{{route('admin#directSchoolEditPage')}}" class=" ps-2  d-flex justify-content-end" method="POST">
-    @csrf
-    <input type="hidden" value="{{$data->schoolName}}" name="schoolName">
-    <input type="hidden" value="{{$data->schoolEmail}}" name="schoolEmail">
-    <input type="hidden" value="{{$data->schoolAddress}}" name="schoolAddress">
-    <input type="hidden" value="{{$data->schoolType}}" name="schoolType">
-    <input type="hidden" value="{{{$data->img}}}" name="img">
-    <button type="sbumit" class=" btn bg-warning my-2 pe-3"><i class=" fas fa-edit "></i></button> &nbsp;
-   </form>
+    <form action="{{route('admin#directSchoolEditPage')}}" class=" ps-2  d-flex justify-content-end" method="POST">
+     @csrf
+     <input type="hidden" value="{{$data->schoolName}}" name="schoolName">
+     <input type="hidden" value="{{$data->schoolEmail}}" name="schoolEmail">
+     <input type="hidden" value="{{$data->schoolAddress}}" name="schoolAddress">
+     <input type="hidden" value="{{$data->schoolType}}" name="schoolType">
+     <input type="hidden" value="{{{$data->img}}}" name="img">
+     <button type="sbumit" class=" btn bg-warning my-2 pe-3"><i class=" fas fa-edit "></i></button> &nbsp;
+    </form>
 
-<a href="{{route('admin#changePasswordPage')}}">
-  &nbsp;  <button type="sbumit" class=" btn bg-primary my-2">Change School Password</button>
-</a>
-&nbsp;
-    <form action="{{route('admin#schoolSignOut')}}" class=" ps-2  d-flex justify-content-end" method="POST">
-        @csrf
-        <button type="sbumit" class=" btn bg-danger my-2">Sign Out</button>
-       </form>
+ <a href="{{route('admin#changePasswordPage')}}">
+   &nbsp;  <button type="sbumit" class=" btn bg-primary my-2">Change School Password</button>
+ </a>
+ &nbsp;
+     <form action="{{route('admin#schoolSignOut')}}" class=" ps-2  d-flex justify-content-end" method="POST">
+         @csrf
+         <button type="sbumit" class=" btn bg-danger my-2">Sign Out</button>
+        </form>
 
-   </div>
+    </div>
+
+
+ @endif
    </div>
 </div>
 </div>
@@ -165,13 +170,317 @@
         </div>
     </div>
 
+    @if (session('userDeleted'))
+    <div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+    <div class="">
+    {{session('userDeleted')}}
+    </div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
+<div class=" col-10 offset-1 mt-4">
+
+<h3 class=" my-3 text-center">Teacher List</h3>
+
+@if (session('teacherCreated'))
+<div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+<div class="">
+{{session('teacherCreated')}}
+</div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+@endif
+
+
+@if (session('teacherUpdated'))
+<div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+<div class="">
+{{session('teacherUpdated')}}
+</div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+@endif
+
+
+
+<div class=" my-2">
+    <div class=" d-flex justify-end col-12 my-3">
+       @if (Auth::user()->role === 'schoolAdmin')
+       <a href="{{route('admin#addTeacherPage')}}">
+        <button type="button" class="btn btn-dark">+ Add New Teacher</button>
+    </a>
+       @endif
+    </div>
+    <table class="table bg-white table-hover text-nowrap text-center">
+        <thead>
+          <tr>
+              <th>Profile</th>
+
+            <th> Name</th>
+            <th> Email</th>
+            <th>Phone</th>
+            <th> Address</th>
+            <th> Gender</th>
+<th>Class</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($teachers as $a)
+            <tr >
+
+                <td class=" ">
+                  @if ($a->img === null)
+    <img src="{{asset('logo/defaultProfile.jpg')}}"  style=" width: 50px;height: 50px;"alt="">
+    @else
+    <img src="{{asset('profileImg/'.$a->img)}}" class="  rounded-circle" style=" width: 50px;height: 50px;" alt="">
+    @endif
+                </td>
+                <td>{{$a->name}}</td>
+                <td>{{$a->email}}</td>
+                <td>{{$a->phone}}</td>
+                <td>{{$a->address}}</td>
+<td>{{$a->gender}}</td>
+<td>{{$a->className}}</td>
+              @if (Auth::user()->role ==='schoolAdmin' || Auth::user()->role === 'owner')
+              <td>
+                <a href="{{route('admin#deleteUser', $a->id)}}">
+                    <button class="btn btn-sm bg-danger text-white">
+                        <i class=" fas fa-trash"></i>
+                      </button>
+                </a>
+
+                <a href="{{route('admin#editTeacherPage',$a->id)}}">
+                    <button class="btn btn-sm bg-warning text-white">
+                        <i class=" fas fa-edit"></i>
+                      </button>
+                </a>
+
+
+            </td>
+              @endif
+              </tr>
+          @endforeach
+
+
+        </tbody>
+
+      </table>
+      <div>
+        {{
+            $teachers->links()
+        }}
+     </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class=" col-10 offset-1 mt-4">
+
+    <h3 class=" my-3 text-center">Student List</h3>
+
+
+    @if (session('studentCreated'))
+<div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+<div class="">
+{{session('studentCreated')}}
+</div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+@endif
+
+
+@if (session('studentUpdated'))
+<div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+<div class="">
+{{session('studentUpdated')}}
+</div>
+
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+@endif
+    <div class=" my-5">
+        <div class=" d-flex justify-end col-12 my-3">
+            <a href="{{route('admin#addStudentPage')}}">
+                <button type="button" class="btn btn-dark">+ Add New Student</button>
+            </a>
+        </div>
+        <table class="table bg-white table-hover text-nowrap text-center">
+            <thead>
+              <tr>
+                  <th>Profile</th>
+
+                <th> Name</th>
+                <th> Email</th>
+                <th>Phone</th>
+                <th> Address</th>
+                <th> Gender</th>
+<th>Class</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach ($students as $a)
+                <tr >
+
+                    <td class=" ">
+                        @if ($a->img === null)
+          <img src="{{asset('logo/defaultProfile.jpg')}}"  style=" width: 50px;height: 50px;"alt="">
+          @else
+          <img src="{{asset('profileImg/'.$a->img)}}" class="  rounded-circle" style=" width: 50px;height: 50px;" alt="">
+          @endif
+                      </td>
+
+                    <td>{{$a->name}}</td>
+                    <td>{{$a->email}}</td>
+                    <td>{{$a->phone}}</td>
+                    <td>{{$a->address}}</td>
+<td>{{$a->gender}}</td>
+<td>{{$a->className}}</td>
+@if (Auth::user()->role === 'owner' || Auth::user()->role === 'schoolAdmin' || Auth::user()->role === 'teacher')
+<td>
+    <a href="{{route('admin#deleteUser', $a->id)}}">
+        <button class="btn btn-sm bg-danger text-white">
+            <i class=" fas fa-trash"></i>
+          </button>
+    </a>
+  <a href="{{route('admin#editStudentPage', $a->id)}}">
+    <button class="btn btn-sm bg-warning text-white">
+        <i class=" fas fa-edit"></i>
+      </button></a>
+  </td>
+@endif
+                  </tr>
+              @endforeach
+
+
+            </tbody>
+
+          </table>
+
+          <div>
+            {{
+                $students->links()
+            }}
+         </div>
+
+    </div>
+    </div>
+
+<br>
+<hr>
+
+<div class=" mt-4">
+
+
+    {{-- @if (session('noticeAdded'))
+    <div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+    <div class="">
+    {{session('noticeAdded')}}
+    </div> --}}
+
+
+
+    @if (session('noticeAdded'))
+    <div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+    <div class="">
+    {{session('noticeAdded')}}
+    </div>
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
+
+
+    @if (session('noticeUpdated'))
+    <div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+    <div class="">
+    {{session('noticeUpdated')}}
+    </div>
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
+
+
+    @if (session('noticeDeleted'))
+    <div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+    <div class="">
+    {{session('noticeDeleted')}}
+    </div>
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
+
+
+
+    <h2 class=" text-center bold">
+        Notices
+    </h2>
+    <div class=" d-flex justify-end col-10 offset-1 my-3">
+        <a href="{{route('admin#addNoticePage')}}">
+            <button type="button" class="btn btn-dark">+ Add New Notices</button>
+        </a>
+    </div>
+
+<div class=" col-10 offset-1 ">
+
+
+   @foreach ($notices as $n)
+   <div class=" bg-primary p-3" style=" border-radius: 6px">
+    <h4 class=" bold">
+    {{$n->name}}
+    </h4>
+{{$n->description}}  -- <h5 class=" mt-2">By {{$n->userName}}({{$n->userRole}})</h5>
+@if (Auth::usr()->id ===  $n->created_by || Auth::user()->role === 'schoolAdmin')
+<span >
+    <a href="{{route('admin#deleteNotice', $n->id)}}">
+    <button class=" btn btn-danger btn-sm">
+        <i class=" fas fa-trash"></i>
+    </button>
+    </a>
+    <a href="{{route('admin#editNotice', $n->id)}}">
+        <button class=" btn btn-warning btn-sm">
+            <i class=" fas fa-edit"></i>
+        </button>
+        </a>
+</span>
+@endif
+</div>
+   @endforeach
+
+</div>
+
+</div>
+
 
 <div class=" col-10 offset-1 mt-4">
 
 
 
-<div>
-  <h3 class=" my-3">School List</h3>
+<div class=" my-4">
+  <h3 class=" bold my-3">School List</h3>
 </div>
   <table class="table bg-white table-hover text-nowrap text-center">
     <thead>
@@ -196,7 +505,7 @@
               @if ($a->img === null)
                 <img src="{{asset('logo/defaultSchool.png')}}" alt="" style=" width: 50px;height: 50px;">
               @else
-
+              <img src="{{asset('schoolLogo/'.$a->img)}}" alt="" style=" width: 50px;height: 50px;">
               @endif
 
             <td>{{$a->schoolName}}</td>
@@ -215,6 +524,13 @@
     </tbody>
 
   </table>
+
+
+  <div>
+    {{
+        $schools->links()
+    }}
+ </div>
 
 </div>
 
@@ -390,7 +706,7 @@
                             @if ($a->img === null)
                               <img src="{{asset('logo/defaultSchool.png')}}" alt="" style=" width: 50px;height: 50px;">
                             @else
-
+                            <img src="{{asset('schoolLogo/'.$a->img)}}" alt="" style=" width: 50px;height: 50px;">
                             @endif
 
                           <td>{{$a->schoolName}}</td>

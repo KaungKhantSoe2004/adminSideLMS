@@ -82,6 +82,7 @@ if($otp === $filledOtp){
 
 
   Auth::login($user);
+  User::where('id',$user->id)->update(['isActive'=>true]);
   return redirect()->route('teacher#home');
 }else{
     $falseError = "False OTP code";
@@ -90,6 +91,13 @@ if($otp === $filledOtp){
 
 }
 
+
+public function logout(){
+    $id = Auth::user()->id;
+    User::where('id',$id)->update(['isActive'=> false]);
+    Auth::logout();
+    return redirect()->route('dashboard');
+}
 
 // buySchool
 public function buySchool(Request $request){

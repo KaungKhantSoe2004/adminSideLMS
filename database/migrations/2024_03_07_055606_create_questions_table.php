@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('onlines', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
-            $table->integer('class_id');
+            $table->string('name');
+            $table->longText('description');
+            $table->longText('firstChoice');
+            $table->longText('secondChoice');
+            $table->longText('thirdChoice');
+            $table->longText('answer');
+            $table->string('assignment_id');
             $table->timestamps();
         });
     }
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('onlines');
+        Schema::dropIfExists('questions');
     }
 };

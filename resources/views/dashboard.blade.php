@@ -24,10 +24,11 @@
               <a  href="{{route('dashboard')}}" class=" text-decoration-none colored" id="home"  >
               Home
               </a>
-              {{-- <a id='admin' class=" text-decoration-none" href="{{route('login')}}" >School Admin</a>
-              <a class=" text-decoration-none" id="teacher" href="{{route('login')}}" >Teacher</a>
-              <a href="#" class=" text-decoration-none" id="student" >Student</a> --}}
+              <a id='admin' class=" text-decoration-none" href="{{route('login')}}" >Log In</a>
+              {{-- <a class=" text-decoration-none" id="teacher" href="{{route('login')}}" >Teacher</a> --}}
+
               <a href="{{route('paymentDirectPage')}}" class=" text-decoration-none" id="payment">Pricing</a>
+              <a href="#" class=" text-decoration-none" id="student" >Student</a>
             </div>
             <div class="navIcon d-md-none d-inline offset-7 mt-3 " id="navIcon"
             >
