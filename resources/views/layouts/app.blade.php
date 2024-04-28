@@ -104,14 +104,14 @@
           </li> --}}
 
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-users"></i>
               <p>
          Users List
               </p>
             </a>
-          </li>
+          </li> --}}
 
           <li class="nav-item">
             <a href="{{route('admin#lessonDirect')}}" class="nav-link">
@@ -140,14 +140,14 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-book"></i>
               <p>
                 Answers
               </p>
             </a>
-          </li>
+          </li> --}}
 
 
           <li class="nav-item">

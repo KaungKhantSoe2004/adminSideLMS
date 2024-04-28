@@ -9,6 +9,6 @@ class subject extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id', 'name','class_id','school_id', 'created_by'
+        'id', 'name','class_id','school_id','authorizor', 'created_by'
     ];
 }

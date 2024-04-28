@@ -26,6 +26,19 @@
     @endif
 
 
+    @if (session('classDifferent'))
+    <div class="alert alert-danger offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+        <div class="">
+          {{session('classDifferent')}}
+        </div>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+    @endif
+
+
+
     @if (session('updated'))
     <div class="alert alert-primary offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
         <div class="">
@@ -72,6 +85,33 @@
                 </div>
               </div>
 
+
+
+
+              @if (Auth::user()->role === 'schoolAdmin')
+              <div class="form-group  ">
+                <label class=" col-form-label">Choose Subject Teacher</label>
+                <div class="">
+                    <select name="teacher" class=" form-control" id="">
+                       @foreach ($teachers as $c)
+                           <option
+                           @if ($c->id ===$subjectData->authorizor)
+                                selected
+                            @endif
+
+                           value="{{$c->id}}">{{$c->name}} ({{$c->className}})</option>
+                       @endforeach
+                    </select>
+              @error('class')
+              <small class=" text-danger ">{{$message}}</small>
+              @enderror
+                </div>
+              </div>
+              @endif
+
+
+
+
     <div class=" ">
         <input type="submit" class=" btn   btn-sm bg-secondary" style=" margin-start: 10px" value="Update">
     </div>
@@ -107,6 +147,25 @@
               @enderror
                 </div>
               </div>
+
+
+              @if (Auth::user()->role === 'schoolAdmin')
+              <div class="form-group  ">
+                <label class=" col-form-label">Choose Subject Teacher</label>
+                <div class="">
+                    <select name="teacher" class=" form-control" id="">
+                       @foreach ($teachers as $c)
+                           <option value="{{$c->id}}">{{$c->name}} ({{$c->className}})</option>
+                       @endforeach
+                    </select>
+              @error('class')
+              <small class=" text-danger ">{{$message}}</small>
+              @enderror
+                </div>
+              </div>
+              @endif
+
+
 
     <div class=" ">
         <input type="submit" class=" btn   btn-sm bg-secondary" style=" margin-start: 10px" value="Create">
@@ -190,7 +249,7 @@
 
                       <th> Name</th>
                       <th>Class</th>
-
+<th>Teacher</th>
                       <th> Created By</th>
                       <th> Created At</th>
                       <th></th>
@@ -206,6 +265,7 @@
 
                           <td>{{$a->name}}</td>
 <td>{{$a->className}}</td>
+<td>{{$a->authorizor}}</td>
                           <td>{{$a->userName}}({{$a->userRole}})</td>
                           <td>{{$a->created_at}}</td>
 

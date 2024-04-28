@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\subject;
 use App\Models\question;
 use App\Models\assignment;
 use Illuminate\Http\Request;
+use App\Models\assignmentDone;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,6 +26,7 @@ class AssignmentController extends Controller
         ->join('subjects', 'assignments.subject_id', 'subjects.id')
         ->join('lms_classes', 'lms_classes.id','subjects.class_id')
         ->where('assignments.school_id',$id)->paginate(10);
+
         // dd($data->toArray());
         return view('pages.assignment',compact(['data']));
     }
@@ -35,13 +38,28 @@ $subject = subject::select('subjects.*', 'lms_classes.name as className')
 ->join('lms_classes', 'subjects.class_id','lms_classes.id')
 ->where('subjects.school_id',$id)->get();
 // dd($subject->toArray());
-    return view('pages.addAssignment',compact(['subject']));
+$mySchoolId = Auth::user()->school_id;
+$teachers = User::select('users.*', 'lms_classes.name as className')->join('lms_classes','users.class_id','lms_classes.id')
+->where('users.school_id',$mySchoolId)->where('users.role','teacher')->get();
+    return view('pages.addAssignment',compact(['subject','teachers']));
 }
 
     // addAssignment
     public function addAssignment(Request $request){
         // dd($request->all());
         $data = $this->getCreatableArray($request);
+        $class_id = subject::where('id',$request->subject)->first()->class_id;
+        $data['class_id']= $class_id;
+        // if(Auth::user()->role === 'schoolAdmin'){
+        //     $class_id = User::where('id',$request->teacher)->first()->class_id;
+        //     if($class_id != $request->class){
+        //         return back()->with(['classDifferent'=> "The class and teacher's class must be same"]);
+        //     }
+        //     $data['authorizor'] = $request->teacher;
+        // }
+        // if(Auth::user()->role === 'teacher'){
+        //     $data['authorizor'] = Auth::user()->id;
+        // }
  $myData =  assignment::create($data);
 $id = $myData->id;
 // dd($request->all());
@@ -108,9 +126,10 @@ public function assignmentInfo(Request $request){
     $id = $request->id;
     $questions = question::where('assignment_id',$id)->get();
     $data = assignment::where('id',$id)->first();
+$dones = assignmentDone::select('assignment_dones.*', 'users.name as userName','users.email', 'users.gender', 'users.phone', 'users.address')->join('users','assignment_dones.user_id','users.id')
+->where('assignment_dones.assignment_id',$id)->paginate(10);
 
-
-    return view('pages.assignmentInfo', compact(['data', 'questions']));
+    return view('pages.assignmentInfo', compact(['data', 'questions', 'dones']));
 }
 
 
@@ -171,4 +190,32 @@ private function getUpdatableData($request){
         'answer'=>$request->answer
     ];
 }
+
+
+// assignmentAnswerInfo
+public function assignmentAnswerInfo(Request $request){
+    $id = $request->id;
+    $userId = assignmentDone::where('id',$id)->first()->user_id;
+    $assignmentId =assignmentDone::where('id',$id)->first()->assignment_id;
+    $userInfo = User::where('id',$userId)->first();
+    $assignmentInfo = assignment::where('id',$id)->first();
+
+    $marks = 0;
+
+    $answerQuestions =    question::select('questions.*','assignment_answers.answer as userAnswer')->leftJoin('assignment_answers','questions.id','assignment_answers.question_id')
+    ->where('assignment_answers.student_id',$userId)
+    ->where('questions.assignment_id',$assignmentId)->get();
+    // $responseData['answerQuestions'] = $answerQuestions;
+$count = $answerQuestions->count();
+foreach ($answerQuestions as $obj) {
+if ($obj->answer === $obj->userAnswer) {
+$marks++;
+}
+
+}
+
+
+    return view('pages.assignmentAnswerInfo',compact(['userInfo','assignmentInfo','marks','answerQuestions','count']));
+}
+
 }

@@ -9,6 +9,6 @@ class assignment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id', 'name','subject_id','school_id','created_by'
+        'id', 'name','subject_id','school_id','authorizor','class_id','created_by'
     ];
 }

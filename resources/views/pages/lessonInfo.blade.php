@@ -107,4 +107,84 @@
 
 </div>
 
+
+
+
+
+<div class=" my-5">
+
+
+    <h2 class="text-center">View List</h2>
+    <table class="table table-hover text-nowrap text-center">
+        <thead>
+          <tr>
+              <th>ID</th>
+
+            <th> Name</th>
+            <th>Email</th>
+<th>Phone</th>
+<th>Gender</th>
+<th>Address</th>
+
+            <th> Created At</th>
+            <th></th>
+            {{-- <th>School Type</th> --}}
+
+            {{-- <th></th> --}}
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($views as $a)
+            <tr>
+              <td>{{$a->id}}</td>
+
+                <td>{{$a->userName}}</td>
+                <td>{{$a->email}}</td>
+                <td>{{$a->phone}}</td>
+<td>{{$a->address}}</td>
+              <td>{{$a->gender}}</td>
+                <td>{{$a->created_at->format('d-m-Y')}}</td>
+
+                <td>
+
+                </td>
+                <td>
+               @if (Auth::user()->role ==='schoolAdmin' || $a->created_by === Auth::user()->id)
+
+                  <a href="{{route('admin#lessonDirect',$a->id)}}">
+                     <button class="btn btn-sm bg-warning text-white">
+                  <i class=" fas fa-edit "></i>
+                  </button>
+
+                 </a>
+                 <a href="{{route('admin#deleteLesson',$a->id)}}">
+                  <button class="btn btn-sm bg-danger text-white">
+               <i class=" fas fa-trash "></i>
+               </button>
+
+              </a>
+
+               @endif
+               <a href="{{route('admin#lessonInfoDirect', $a->id)}}">
+                  <button class="btn btn-sm bg-primary text-white">
+               <i class=" fas fa-info "></i>
+               </button>
+
+              </a>
+              </td>
+              </tr>
+          @endforeach
+
+
+        </tbody>
+
+        <div>
+            {{
+                $views->links()
+            }}
+         </div>
+      </table>
+
+</div>
+
 @endsection

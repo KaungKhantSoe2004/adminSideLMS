@@ -49,6 +49,9 @@ public function mailSent(Request $request){
 $user = User::where('email',$request->email)->first();
 
 if($user){
+    if($user->role === 'student'){
+        return back();
+    }
     $allOtp = otp::where('user_id',$user->id)->get();
     foreach( $allOtp as $eachOtp){
         otp::where('id',$eachOtp->id)->delete();
@@ -79,7 +82,7 @@ public function otpVerify(Request $request){
     // dd($request->all(),$otp);
 $filledOtp = $request->first.$request->second.$request->third.$request->fourth;
 if($otp === $filledOtp){
-
+    // otp::where('user_id',$request->user_id)->delete();
 
   Auth::login($user);
   User::where('id',$user->id)->update(['isActive'=>true]);

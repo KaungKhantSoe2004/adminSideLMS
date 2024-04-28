@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class answer extends Model
+class AssignmentAnswer extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id', 'student_id', 'lesson_id', 'answerFile','created_by'
+        'student_id', 'question_id', 'answer', 'status'
     ];
 }

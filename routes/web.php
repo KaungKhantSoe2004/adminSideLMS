@@ -137,6 +137,9 @@ Route::get('assignmentInfo/{id}', [AssignmentController::class,'assignmentInfo']
 Route::get('editAssignment/{id}', [AssignmentController::class, 'editAssignment'])->name('admin#editAssignment');
 Route::post('updateAssignment', [AssignmentController::class, 'updateAssignment'])->name('admin#updateAssignment');
 Route::post('updateQuestion', [AssignmentController::class, 'updateQuestion'])->name('admin#updateQuestion');
+Route::get('assignmentAnswerInfo/{id}', [AssignmentController::class, 'assignmentAnswerInfo'])->name('admin#assignmentAnswerInfo');
+
+
 
 // DOCUMENTATION ROUTE
 Route::get('/documentation',[DocumentationController::class, 'directDocumentation'])->name('teacher#directDocumentaion');

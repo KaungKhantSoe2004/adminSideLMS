@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('class_id');
             $table->integer('school_id');
+            $table->integer('authorizor')->nullable();
             $table->string('created_by');
             $table->timestamps();
         });

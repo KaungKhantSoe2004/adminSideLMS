@@ -8,6 +8,18 @@
 
 @csrf
 
+{{-- @if (session('classDifferent'))
+<div class="alert alert-danger offset-7 my-3 col-5 alert-dismissible fade show" role="alert">
+    <div class="">
+      {{session('classDifferent')}}
+    </div>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+@endif --}}
+
+
         <div class="form-group ">
             <label class=" col-form-label">Name</label>
             <div class="">
@@ -41,6 +53,42 @@
 
             </div>
           </div>
+
+
+          {{-- <div class="form-group ">
+            <label class=" col-form-label">Subject</label>
+            <div class="">
+                <select name="subject" placeholder="Choose Teacher Class" class=" form-control" id="">
+                 @foreach ($subject as $item)
+                   <option value="{{$item->id}}">{{$item->name}}({{$item->className}})</option>
+                 @endforeach
+                </select>
+          @error('gender')
+          <small class=" text-danger ">{{$message}}</small>
+          @enderror
+
+            </div>
+          </div> --}}
+
+
+
+          {{-- @if (Auth::user()->role === 'schoolAdmin')
+          <div class="form-group  ">
+            <label class=" col-form-label">Choose Subject Teacher</label>
+            <div class="">
+                <select name="teacher" class=" form-control" id="">
+                   @foreach ($teachers as $c)
+                       <option value="{{$c->id}}">{{$c->name}} ({{$c->className}})</option>
+                   @endforeach
+                </select>
+          @error('class')
+          <small class=" text-danger ">{{$message}}</small>
+          @enderror
+            </div>
+          </div>
+          @endif --}}
+
+
 
 
         <div class=" card">

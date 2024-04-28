@@ -453,7 +453,7 @@
     {{$n->name}}
     </h4>
 {{$n->description}}  -- <h5 class=" mt-2">By {{$n->userName}}({{$n->userRole}})</h5>
-@if (Auth::usr()->id ===  $n->created_by || Auth::user()->role === 'schoolAdmin')
+@if (Auth::user()->id ===  $n->created_by || Auth::user()->role === 'schoolAdmin')
 <span >
     <a href="{{route('admin#deleteNotice', $n->id)}}">
     <button class=" btn btn-danger btn-sm">

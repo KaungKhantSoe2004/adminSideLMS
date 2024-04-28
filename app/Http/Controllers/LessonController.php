@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\done;
+use App\Models\view;
 use App\Models\lesson;
 use App\Models\subject;
 use App\Models\lmsClass;
@@ -19,7 +20,7 @@ class LessonController extends Controller
 
   if($school_id){
     $editId = $request->id;
-
+    // $views = view::where()
     $data = lesson::select('lessons.*','subjects.name as subjectName','lms_classes.name as className', 'users.name as userName', 'users.role as userRole')
    ->when($request->key , function($query){
     $key = request('key');
@@ -157,8 +158,10 @@ public function lessonInfoDirect(Request $request){
     ->where('dones.lesson_id',$id)->get();
 
     $data = lesson::where('id',$id)->first();
-
-return view('pages.lessonInfo',compact(['data','done']));
+$views = view::select('views.*', 'users.name as userName','users.email','users.gender','users.phone','users.address')->join('users','views.student_id','users.id')
+->where('lesson_id',$id)->paginate(10);
+// dd($views);
+return view('pages.lessonInfo',compact(['data','done','views']));
 }
 
 // lessonDone
