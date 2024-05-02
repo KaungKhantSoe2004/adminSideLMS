@@ -146,6 +146,46 @@ return response()->json([
 }
 
 
+
+// reloadEditPassword
+public function reloadEditPassword(Request $request){
+    $id = $request->id;
+    $user = User::where('id',$id)->first();
+    logger($user->password);
+    return response()->json([
+        'status'=>true,
+        'data'=> [
+            'user'=> $user
+        // 'password' => $user->password
+        ]
+    ]);
+}
+
+// updatePassword
+public function updatePassword(Request $request){
+$oldPassword = $request->oldPassword;
+$newPassword = $request->newPassword;
+$id = $request->id;
+$userInfo = User::where('id',$id)->first();
+$password = $userInfo->password;
+if(Hash::check($oldPassword,$password)){
+$hashedValue = Hash::make($newPassword);
+User::where('id',$id)->update([
+    'password'=> $hashedValue
+]);
+return response()->json([
+    'status' => true
+]);
+}else{
+return response()->json(
+    [
+        'status'=>false,
+        'message'=> 'oldPassword incorrect'
+    ]
+);
+}
+}
+
 // classesReload
 public function classesReload(Request $request){
     $id = $request->class_id;

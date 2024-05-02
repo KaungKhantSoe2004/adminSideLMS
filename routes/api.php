@@ -39,6 +39,8 @@ Route::post('lms/postMessage', [ApiController::class, 'postMessage'])->name('lms
 Route::post('lms/reloadEditProfile',[ApiController::class, 'reloadEditProfile'])->name('lms#reloadEditProfile')->middleware('auth:sanctum');
 Route::post('lms/updateProfile', [ApiController::class, 'updateProfile'])->name('lms#updateProfile')->middleware('auth:sanctum');
 Route::post('lms/addView',[ApiController::class, 'addView'])->name('lms#addView')->name('lms#addView')->middleware('auth:sanctum');
+Route::post('lms/reloadEditPassword', [ApiController::class, 'reloadEditPassword'])->name('lms#reloadEditPassword')->middleware('auth:sanctum');
+Route::post('lms/updatePassword', [ApiController::class, 'updatePassword'])->name('lms#updatePassword')->middleware('auth:sanctum');
 // Route::post('lms/assignmentAnswerDetails', [ApiController::class, 'assignmentAnswerDetails'])->name('lms#assignmentAnswerDetails')->middleware('auth:sanctum');
 
 

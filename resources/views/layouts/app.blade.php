@@ -26,7 +26,7 @@
 
       <span class="brand-text  font-weight-light">
         <div class=" text-center">
-        KAMUI LMS</div>
+       SaSaKi LMS</div>
     </span>
     </a>
     <div class="sidebar">
